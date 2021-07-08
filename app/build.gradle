@@ -54,13 +54,16 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     // Card View
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // SwipeRefreshLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Shape Image View
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
 }

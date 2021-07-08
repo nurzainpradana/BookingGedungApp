@@ -9,14 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingGedung">
-        <activity android:name=".ui.splashscreen.SplashScreenActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.detailgedung.DetailGedungActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.pemilik.PemilikMainActivity" />
+        <activity android:name=".ui.main.customer.CustomerMainActivity" />
+        <activity android:name=".ui.signin.SignInActivity" />
+        <activity android:name=".ui.signup.SignUpActivity" />
+        <activity android:name=".ui.splashscreen.SplashScreenActivity">
+
+        </activity>
+        <activity android:name=".ui.main.MainActivity" />
     </application>
 
 </manifest>

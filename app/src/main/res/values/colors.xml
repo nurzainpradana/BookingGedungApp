@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    Custom Color -->
+    <color name="lime">#88bda1</color>
+    <color name="dark_lime">#88bda3</color>
+    <color name="gray">#5e747f</color>
+    <color name="dark_gray">#2B2C2C</color>
+    <color name="orange">#faa62d</color>
+    <color name="white_lime">#f2f9f1</color>
+
 </resources>
