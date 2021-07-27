@@ -8,13 +8,15 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.afifemwe.bookinggedung.R
+import com.afifemwe.bookinggedung.api.Api
+import com.afifemwe.bookinggedung.api.ApiInterfaces
 import com.afifemwe.bookinggedung.databinding.ActivitySignInBinding
+import com.afifemwe.bookinggedung.model.GeneralResponse
 import com.afifemwe.bookinggedung.ui.main.customer.CustomerMainActivity
 import com.afifemwe.bookinggedung.ui.main.pemilik.PemilikMainActivity
-import com.afifemwe.bookinggedung.utils.Const
-import com.afifemwe.bookinggedung.utils.CustomToast
-import com.afifemwe.bookinggedung.utils.UserPreference
-import com.afifemwe.bookinggedung.utils.ValidateInput
+import com.afifemwe.bookinggedung.utils.*
+import retrofit2.Call
+import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
@@ -52,19 +54,59 @@ class SignInActivity : AppCompatActivity() {
             tipePengguna = spinnerTipePengguna.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty() && tipePengguna.isNotEmpty()) {
-                // Check Email
-                // Save Data To Database
+
+                if(NetworkUtility.isInternetAvailable(this@SignInActivity)) {
+                    try {
+                        val service = Api.getApi()!!.create(ApiInterfaces::class.java)
+                        val call = service.checkLogin(
+                            username = username,
+                            password = password,
+                            tipe_user = tipePengguna
+                        )
+
+                        call.enqueue(object: retrofit2.Callback<GeneralResponse> {
+                            override fun onResponse(
+                                call: Call<GeneralResponse>,
+                                response: Response<GeneralResponse>
+                            ) {
+                                if (response.body()?.code == 200) {
+                                    when(tipePengguna) {
+                                        Const.PEMILIK -> {
+                                            goToMain(PemilikMainActivity::class.java)
+                                        }
+
+                                        Const.CUSTOMER -> {
+                                            goToMain(CustomerMainActivity::class.java)
+                                        }
+                                        else -> {
+                                            NetworkUtility.checkYourConnection(this@SignInActivity)
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(this@SignInActivity, response.body()?.message.toString(), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+
+                            override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {
+                                NetworkUtility.checkYourConnection(this@SignInActivity)
+                            }
+                        })
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        NetworkUtility.checkYourConnection(this@SignInActivity)
+                    }
+                }
 
                 val userPref = UserPreference(this@SignInActivity)
                 userPref.setUsername(username)
                 userPref.setTipePengguna(tipePengguna)
 
-                Toast.makeText(this@SignInActivity, "Berhasil Save UserPreference", Toast.LENGTH_SHORT).show()
-
-                when(tipePengguna) {
-                    Const.PEMILIK -> goToMain(CustomerMainActivity::class.java)
-                    Const.CUSTOMER -> goToMain(PemilikMainActivity::class.java)
-                }
+//                Toast.makeText(this@SignInActivity, "Berhasil Save UserPreference", Toast.LENGTH_SHORT).show()
+//
+//                when(tipePengguna) {
+//                    Const.PEMILIK -> goToMain(CustomerMainActivity::class.java)
+//                    Const.CUSTOMER -> goToMain(PemilikMainActivity::class.java)
+//                }
             } else {
                 CustomToast.showMessage(this@SignInActivity, "Data Belum Lengkap")
             }

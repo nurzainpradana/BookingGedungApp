@@ -16,7 +16,7 @@ class Api {
                     .create()
 
                 retrofit = Retrofit.Builder()
-                    .baseUrl(Const.LOCAL_BASE_URL)
+                    .baseUrl(Const.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
             }

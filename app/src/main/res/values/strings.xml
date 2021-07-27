@@ -29,4 +29,12 @@
     <string name="sign_up_text">Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nama_text">Nama</string>
+    <string name="no_hp_text">Nomor HP</string>
+    <string name="jenis_kelamin_text">Jenis Kelamin</string>
+    <string name="alamat_text">Alamat</string>
+    <string name="nama_bank_text">Nama Bank</string>
+    <string name="no_rekening_text">Nomor Rekening</string>
+    <string name="nama_pemilik_text">Nama Pemilik</string>
+    <string name="check_your_connection">Cek Koneksi Internet Anda</string>
 </resources>

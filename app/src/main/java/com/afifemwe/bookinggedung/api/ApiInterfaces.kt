@@ -10,10 +10,11 @@ interface ApiInterfaces {
 
     /* Registrasi Akun Baru */
     @FormUrlEncoded
-    @POST("register_akun")
+    @POST("registrasi_akun")
     fun registerAkun(
         @Field("name") nama: String,
         @Field("username") username: String,
+        @Field("email") email: String,
         @Field("password") password: String,
         @Field("no_hp") no_hp: String,
         @Field("jenis_kelamin") jenis_kelamin: String,
