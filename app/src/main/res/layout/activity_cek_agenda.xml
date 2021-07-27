@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_24dp"
             android:background="@color/dark_lime"
-            tools:text="09 Juli 2021"
+            android:text="09 Juli 2021"
             android:textColor="@color/white_lime"
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"

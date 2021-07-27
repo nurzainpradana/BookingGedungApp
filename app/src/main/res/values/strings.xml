@@ -37,4 +37,6 @@
     <string name="no_rekening_text">Nomor Rekening</string>
     <string name="nama_pemilik_text">Nama Pemilik</string>
     <string name="check_your_connection">Cek Koneksi Internet Anda</string>
+    <string name="beranda_pemilik">Beranda</string>
+    <string name="beranda">Beranda</string>
 </resources>

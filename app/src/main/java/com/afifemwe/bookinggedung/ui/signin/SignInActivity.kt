@@ -69,7 +69,12 @@ class SignInActivity : AppCompatActivity() {
                                 call: Call<GeneralResponse>,
                                 response: Response<GeneralResponse>
                             ) {
-                                if (response.body()?.code == 200) {
+
+                                val userPref = UserPreference(this@SignInActivity)
+                                userPref.setUsername(username)
+                                userPref.setTipePengguna(tipePengguna)
+
+                                if (response.body()?.status == Const.SUCCESS_RESPONSE) {
                                     when(tipePengguna) {
                                         Const.PEMILIK -> {
                                             goToMain(PemilikMainActivity::class.java)
@@ -97,9 +102,7 @@ class SignInActivity : AppCompatActivity() {
                     }
                 }
 
-                val userPref = UserPreference(this@SignInActivity)
-                userPref.setUsername(username)
-                userPref.setTipePengguna(tipePengguna)
+
 
 //                Toast.makeText(this@SignInActivity, "Berhasil Save UserPreference", Toast.LENGTH_SHORT).show()
 //
@@ -116,8 +119,8 @@ class SignInActivity : AppCompatActivity() {
     private fun getTipePenggunaList(): MutableList<String> {
         val pengguna: ArrayList<String> = ArrayList()
 
-        pengguna.add(0,"Pemilik")
-        pengguna.add(1,"Customer")
+        pengguna.add(0, Const.PEMILIK)
+        pengguna.add(1, Const.CUSTOMER)
 
         return pengguna
     }

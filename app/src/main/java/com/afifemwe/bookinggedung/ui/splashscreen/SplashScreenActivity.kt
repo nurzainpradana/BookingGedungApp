@@ -40,17 +40,17 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun checkLogin() {
-//        val userPref = UserPreference(this)
-//
-//        if (!userPref.getTipePengguna().equals(null) && !userPref.getUsername().equals(null)) {
-//            tipePengguna = userPref.getTipePengguna().toString()
-//
-//            when(tipePengguna) {
-//                Const.CUSTOMER -> goToMain(CustomerMainActivity::class.java)
-//
-//                Const.PEMILIK -> goToMain(PemilikMainActivity::class.java)
-//            }
-//        }
+        val userPref = UserPreference(this)
+
+        if (!userPref.getTipePengguna().equals(null) && !userPref.getUsername().equals(null)) {
+            tipePengguna = userPref.getTipePengguna().toString()
+
+            when(tipePengguna) {
+                Const.CUSTOMER -> goToMain(CustomerMainActivity::class.java)
+
+                Const.PEMILIK -> goToMain(PemilikMainActivity::class.java)
+            }
+        }
     }
 
     private fun goToMain(activity: Class<*>) {

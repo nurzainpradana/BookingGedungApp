@@ -15,12 +15,13 @@
         tools:context=".ui.splashscreen.SplashScreenActivity">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="300dp"
-            android:background="@color/orange"
             android:layout_marginBottom="@dimen/dimen_24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_sign_up"/>
+            android:background="@drawable/icon_building"
+            app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sign_up"

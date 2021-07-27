@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:navGraph="@navigation/mobile_navigation"
+        app:navGraph="@navigation/navigation_pemilik"
         app:defaultNavHost="true"
         tools:ignore="FragmentTagUsage"
         />
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:elevation="5dp"
-        app:menu="@menu/bottom_nav_menu"
+        app:menu="@menu/bottom_nav_menu_pemilik"
         android:background="@drawable/bg_top_radius_dark_lime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
