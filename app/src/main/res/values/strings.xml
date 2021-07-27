@@ -39,4 +39,7 @@
     <string name="check_your_connection">Cek Koneksi Internet Anda</string>
     <string name="beranda_pemilik">Beranda</string>
     <string name="beranda">Beranda</string>
+    <string name="cari">Cari</string>
+    <string name="history">History</string>
+    <string name="profile">Profil</string>
 </resources>

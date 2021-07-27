@@ -4,4 +4,12 @@
         android:id="@+id/navigation_main_pemilik"
         android:icon="@drawable/ic_home"
         android:title="@string/beranda"/>
+    <item
+        android:id="@+id/navigation_history_booking"
+        android:icon="@drawable/ic_transaksi"
+        android:title="@string/history"/>
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/ic_person"
+        android:title="@string/profile"/>
 </menu>
