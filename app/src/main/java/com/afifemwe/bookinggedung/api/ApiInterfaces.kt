@@ -33,4 +33,27 @@ interface ApiInterfaces {
         @Field("password") password: String,
         @Field("tipe_user") tipe_user: String,
     ): Call<GeneralResponse>
+
+    /* Upload Photo Gedung */
+    @FormUrlEncoded
+    @POST("upload_photo")
+    fun uploadPhoto(
+        @Field("imgPath") imgPath: String?,
+        @Field("imgName") imgName: String?
+    ): Call<GeneralResponse>
+
+
+    /* Registrasi Gedung Baru */
+    @FormUrlEncoded
+    @POST("buat_gedung_baru")
+    fun buatGedungBaru(
+        @Field("nama") nama: String,
+        @Field("gambar") gambar: String,
+        @Field("kapasitas") kapasitas: String,
+        @Field("fasilitas") fasilitas: String,
+        @Field("jam_operasional") jam_operasional: String,
+        @Field("maps") maps: String,
+        @Field("harga") harga: String,
+        @Field("pemillik") pemilik: String
+    ): Call<GeneralResponse>
 }

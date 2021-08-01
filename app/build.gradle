@@ -70,4 +70,14 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    // Image Picker
+//    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+    implementation 'com.github.florent37:inline-activity-result-kotlin:1.0.4'
+
+
+    // Dexter
+    implementation 'com.karumi:dexter:5.0.0'
+
 }

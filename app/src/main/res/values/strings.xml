@@ -42,4 +42,17 @@
     <string name="cari">Cari</string>
     <string name="history">History</string>
     <string name="profile">Profil</string>
+    <string name="nama_gedung_text">Nama Gedung</string>
+    <string name="kapasitas_text">Kapasitas</string>
+    <string name="maps_link_text">Link Maps</string>
+    <string name="harga_text">Harga</string>
+    <string name="jam_operasional_text">Jam Operasional</string>
+    <string name="parkir_text">Parkir</string>
+    <string name="toilet_text">Toilet</string>
+    <string name="musollah_text">Musollah</string>
+    <string name="kursi_meja_text">Kursi &#47; Meja</string>
+    <string name="AC">AC</string>
+    <string name="gambar_text">Gambar</string>
+    <string name="upload_gambar_text">Upload Gambar</string>
+    <string name="simpan_text">Simpan</string>
 </resources>
