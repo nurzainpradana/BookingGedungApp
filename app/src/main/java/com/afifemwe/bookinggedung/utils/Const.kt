@@ -4,6 +4,7 @@ class Const {
     companion object {
         const val LOCAL_BASE_URL = "http://afifemwe.com/bookinggedung/api/"
         const val BASE_URL = "http://afifemwe.com/bookinggedung/api/"
+        const val PHOTO_URL = "http://afifemwe.com/bookinggedung/public/photo_upload/"
 
         const val PEMILIK = "pemilik"
         const val CUSTOMER = "customer"

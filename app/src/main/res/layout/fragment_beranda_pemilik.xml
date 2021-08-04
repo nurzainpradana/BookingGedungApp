@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="storelist"-->
-<!--            type="id.co.sm.display.ui.choosestore.viewmodel.ChooseStoreViewModel" />-->
+        <variable
+            name="gedungList"
+            type="com.afifemwe.bookinggedung.ui.main.pemilik.beranda.BerandaPemilikViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

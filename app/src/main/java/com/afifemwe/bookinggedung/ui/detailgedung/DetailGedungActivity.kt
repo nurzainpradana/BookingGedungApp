@@ -8,6 +8,10 @@ import com.afifemwe.bookinggedung.databinding.ActivityDetailGedungBinding
 
 class DetailGedungActivity : AppCompatActivity() {
 
+    companion object {
+        const val NAMA_GEDUNG_KEY = "nama_gedung_key"
+    }
+
     private lateinit var bind: ActivityDetailGedungBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

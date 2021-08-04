@@ -1,6 +1,7 @@
 package com.afifemwe.bookinggedung.api
 
 import com.afifemwe.bookinggedung.model.GeneralResponse
+import com.afifemwe.bookinggedung.ui.main.pemilik.beranda.response.GetGedungListResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -54,6 +55,13 @@ interface ApiInterfaces {
         @Field("jam_operasional") jam_operasional: String,
         @Field("maps") maps: String,
         @Field("harga") harga: String,
-        @Field("pemillik") pemilik: String
+        @Field("pemilik") pemilik: String
     ): Call<GeneralResponse>
+
+    /* Get List Gedung Pemilik */
+    @FormUrlEncoded
+    @POST("get_gedung_list_pemilik")
+    fun getGedungListPemilik(
+        @Field("pemilik") pemilik: String
+    ): Call<GetGedungListResponse>
 }

@@ -69,7 +69,7 @@ class CreateGedungActivity : AppCompatActivity() {
                                 val fileNameSegment: List<String> = file.path.split("/")
                                 photoName = fileNameSegment[fileNameSegment.size - 1]
                                 photoName =
-                                    """Photo_Gedung_${Calendar.getInstance().timeInMillis}"""
+                                    """Photo_Gedung_${Calendar.getInstance().timeInMillis}.jpg"""
 
                                 if (NetworkUtility.isInternetAvailable(this@CreateGedungActivity)) {
                                     executor.execute {
