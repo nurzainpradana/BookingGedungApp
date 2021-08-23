@@ -58,7 +58,6 @@ class CreateGedungActivity : AppCompatActivity() {
                 progressDialog.show()
 
                 ImagePicker.with(this@CreateGedungActivity)
-                    .crop()
                     .start { resultCode, data ->
                         if (resultCode == Activity.RESULT_OK) {
                             ivGambarGedung.setImageURI(data?.data)
@@ -147,8 +146,8 @@ class CreateGedungActivity : AppCompatActivity() {
                             nama = namaGedung,
                             gambar = photoName,
                             kapasitas = kapasitas,
-                            fasilitas = listFasilitas.toString(),
-                            jam_operasional = listJamOperasional.toString(),
+                            fasilitas = listFasilitas.toString().replace("[]",""),
+                            jam_operasional = listJamOperasional.toString().replace("[]",""),
                             maps = linkMaps,
                             harga = harga,
                             pemilik = pemilik.toString()

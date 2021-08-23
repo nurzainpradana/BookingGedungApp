@@ -74,6 +74,8 @@ class SignInActivity : AppCompatActivity() {
                                 userPref.setUsername(username)
                                 userPref.setTipePengguna(tipePengguna)
 
+                                Toast.makeText(this@SignInActivity, tipePengguna, Toast.LENGTH_SHORT).show()
+
                                 if (response.body()?.status == Const.SUCCESS_RESPONSE) {
                                     when(tipePengguna) {
                                         Const.PEMILIK -> {
@@ -81,7 +83,11 @@ class SignInActivity : AppCompatActivity() {
                                         }
 
                                         Const.CUSTOMER -> {
-                                            goToMain(CustomerMainActivity::class.java)
+//                                            goToMain(CustomerMainActivity::class.java)
+                                            val i = Intent(this@SignInActivity, CustomerMainActivity::class.java)
+                                            startActivity(i)
+                                            finish()
+//                                            Toast.makeText(this@SignInActivity, " Customer Activty", Toast.LENGTH_SHORT).show()
                                         }
                                         else -> {
                                             NetworkUtility.checkYourConnection(this@SignInActivity)

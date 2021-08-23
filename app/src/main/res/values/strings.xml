@@ -55,4 +55,9 @@
     <string name="gambar_text">Gambar</string>
     <string name="upload_gambar_text">Upload Gambar</string>
     <string name="simpan_text">Simpan</string>
+    <string name="harga_3_juta_text"><![CDATA[Harga > 3 Juta]]></string>
+    <string name="harga_3_juta_down_text"><![CDATA[Harga < 3 Juta]]></string>
+    <string name="kapasitas_500_up_text"><![CDATA[Kapasitas > 500]]></string>
+    <string name="kapasitas_500_down_text"><![CDATA[Kapasitas < 500]]></string>
+    <string name="tampil_semua_text">Tampil Semua</string>
 </resources>

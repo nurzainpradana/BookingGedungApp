@@ -1,10 +1,13 @@
 package com.afifemwe.bookinggedung.api
 
 import com.afifemwe.bookinggedung.model.GeneralResponse
+import com.afifemwe.bookinggedung.ui.cekagenda.response.CheckBookingResponse
+import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
 import com.afifemwe.bookinggedung.ui.main.pemilik.beranda.response.GetGedungListResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiInterfaces {
@@ -64,4 +67,41 @@ interface ApiInterfaces {
     fun getGedungListPemilik(
         @Field("pemilik") pemilik: String
     ): Call<GetGedungListResponse>
+
+    /* Get List Gedung Pemilik Filter*/
+    @FormUrlEncoded
+    @POST("get_gedung_list_pemilik_filter")
+    fun getGedungListPemilikFilter(
+        @Field("pemilik") pemilik: String,
+        @Field("filterBy") filterBy: String
+    ): Call<GetGedungListResponse>
+
+
+    /* Get List Gedung Customer */
+    @GET("get_gedung_list_customer")
+    fun getGedungListCustomer(): Call<GetGedungListResponse>
+
+    /* Get List Gedung Pemilik Filter*/
+    @FormUrlEncoded
+    @POST("get_gedung_list_customer_filter")
+    fun getGedungListCustomerFilter(
+        @Field("filterBy") filterBy: String
+    ): Call<GetGedungListResponse>
+
+
+    /* Get List Gedung Detail */
+    @FormUrlEncoded
+    @POST("get_gedung_detail")
+    fun getGedungDetail(
+        @Field("idGedung") idGedung: String
+    ): Call<GedungDetailResponse>
+
+
+    /* Cek Ketersediaan Gedung */
+    @FormUrlEncoded
+    @POST("check_booking_gedung")
+    fun checkBooking(
+        @Field("id_gedung") idGedung: String,
+        @Field("tgl_sewa") tanggalCekKetersediaan: String
+    ): Call<CheckBookingResponse>
 }

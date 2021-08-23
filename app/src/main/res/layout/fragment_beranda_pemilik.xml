@@ -32,27 +32,43 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <com.google.android.material.card.MaterialCardView
+
+
+            <LinearLayout
                 android:id="@+id/search_view_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_16dp"
-                app:cardCornerRadius="@dimen/dimen_8dp"
-                android:background="@color/white"
-                android:visibility="visible"
-                tools:visibility="visible"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_search"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_search">
-                <EditText
-                    android:id="@+id/et_search"
+                app:layout_constraintEnd_toEndOf="parent">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/dimen_16dp"
+                    app:cardCornerRadius="@dimen/dimen_8dp"
+                    android:background="@color/white"
+                    android:visibility="visible"
+                    tools:visibility="visible">
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_8dp"
+                        android:drawableTint="@color/dark_lime"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:hint="@string/cari"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <ImageView
+                    android:id="@+id/iv_filter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dimen_8dp"
-                    android:drawableTint="@color/dark_lime"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:hint="@string/cari"/>
-            </com.google.android.material.card.MaterialCardView>
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:layout_weight="5"
+                    android:src="@drawable/ic_filter" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_waiting"

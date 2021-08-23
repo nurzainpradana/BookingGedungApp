@@ -50,4 +50,42 @@ class BerandaPemilikViewModel(application: Application): AndroidViewModel(applic
             NetworkUtility.checkYourConnection(context)
         }
     }
+
+
+    fun getGedungPemilikListFilter(
+        context: Context?,
+        pemilik: String,
+        filterBy: String
+    ) {
+        if (NetworkUtility.isInternetAvailable(context!!)) {
+            try {
+                val service = Api.getApi()!!.create(ApiInterfaces::class.java)
+                val call = service.getGedungListPemilikFilter(pemilik = pemilik, filterBy = filterBy)
+                call.enqueue(object: Callback<GetGedungListResponse> {
+                    override fun onResponse(
+                        call: Call<GetGedungListResponse>,
+                        response: Response<GetGedungListResponse>
+                    ) {
+                        if (response.body()!= null) {
+                            gedungPemilikList.postValue(response.body()?.listGedung as List<ListGedungItem>)
+                        } else {
+                            NetworkUtility.checkYourConnection(context)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<GetGedungListResponse>, t: Throwable) {
+                        NetworkUtility.checkYourConnection(context)
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                NetworkUtility.checkYourConnection(context)
+            }
+        } else {
+            NetworkUtility.checkYourConnection(context)
+        }
+    }
+
+
+
 }
