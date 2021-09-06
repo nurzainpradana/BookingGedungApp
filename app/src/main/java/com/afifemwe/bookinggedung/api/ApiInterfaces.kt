@@ -104,4 +104,17 @@ interface ApiInterfaces {
         @Field("id_gedung") idGedung: String,
         @Field("tgl_sewa") tanggalCekKetersediaan: String
     ): Call<CheckBookingResponse>
+
+    /* BookingGedung */
+    @FormUrlEncoded
+    @POST("booking_gedung")
+    fun bookingGedung(
+        @Field("id_gedung") idGedung: String,
+        @Field("username") username: String,
+        @Field("tanggal_booking") tanggalBooking: String,
+        @Field("tanggal_sewa") tanggalSewa: String,
+        @Field("waktu_sewa") waktuSewa: String,
+        @Field("biaya") biaya: String,
+        @Field("status") status: String
+    ): Call<GeneralResponse>
 }

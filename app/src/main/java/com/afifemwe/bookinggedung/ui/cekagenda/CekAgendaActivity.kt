@@ -18,6 +18,10 @@ import com.afifemwe.bookinggedung.api.Api
 import com.afifemwe.bookinggedung.api.ApiInterfaces
 import com.afifemwe.bookinggedung.databinding.ActivityCekAgendaBinding
 import com.afifemwe.bookinggedung.ui.cekagenda.response.CheckBookingResponse
+import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity
+import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity.Companion.BIAYA_SEWA_KEY
+import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity.Companion.NAMA_GEDUNG_KEY
+import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity.Companion.WAKTU_SEWA_KEY
 import com.afifemwe.bookinggedung.ui.detailgedung.DetailGedungActivity.Companion.ID_GEDUNG_KEY
 import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
 import com.afifemwe.bookinggedung.utils.Const
@@ -35,11 +39,14 @@ class CekAgendaActivity : AppCompatActivity() {
 
     companion object {
         const val TANGGAL_SEWA_KEY = "tanggal_sewa_key"
+        const val HARGA_SEWA_KEY = "harga_sewa_key"
     }
 
     private lateinit var bind: ActivityCekAgendaBinding
     private var idGedung = ""
     private var tanggalCekKetersediaan = ""
+    private var hargaSewa = ""
+    private var namaGedung = ""
 
     private var listChecked = ""
 
@@ -55,6 +62,8 @@ class CekAgendaActivity : AppCompatActivity() {
 
         
         idGedung = intent.getStringExtra(ID_GEDUNG_KEY).toString()
+        hargaSewa = intent.getStringExtra(HARGA_SEWA_KEY).toString()
+        namaGedung = intent.getStringExtra(NAMA_GEDUNG_KEY).toString()
         
         if (intent.getStringExtra(TANGGAL_SEWA_KEY).isNullOrEmpty()) {
             var formatDate = "E, dd MM yyyy"
@@ -89,10 +98,20 @@ class CekAgendaActivity : AppCompatActivity() {
         }
 
         bind.btnBooking.setOnClickListener {
-            if (listCheckedBox.isEmpty()){
+            Log.i("List", listCheckedBox.toString())
+            if (listCheckedBox.isNullOrEmpty()){
                 Toast.makeText(this, "Silahkan Pilih Jam Booking Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             } else {
-
+                var biayaSewa = hargaSewa.toDouble() * (listCheckedBox.size + 1).toDouble()
+                // PINDAH KE CHECKOUT
+                val i = Intent(this, CheckoutActivity::class.java)
+                i.putExtra(ID_GEDUNG_KEY, idGedung)
+                i.putExtra(TANGGAL_SEWA_KEY, tanggalCekKetersediaan)
+                i.putExtra(WAKTU_SEWA_KEY, listCheckedBox.toString())
+                i.putExtra(BIAYA_SEWA_KEY, biayaSewa)
+                i.putExtra(HARGA_SEWA_KEY, hargaSewa)
+                i.putExtra(NAMA_GEDUNG_KEY, namaGedung)
+                startActivity(i)
             }
         }
     }
@@ -152,6 +171,8 @@ class CekAgendaActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        } else {
+            NetworkUtility.checkYourConnection(this)
         }
     }
 

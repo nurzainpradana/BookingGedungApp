@@ -17,7 +17,9 @@ import com.afifemwe.bookinggedung.api.ApiInterfaces
 import com.afifemwe.bookinggedung.databinding.ActivityDetailGedungBinding
 import com.afifemwe.bookinggedung.model.Fasilitas
 import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity
+import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity.Companion.HARGA_SEWA_KEY
 import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity.Companion.TANGGAL_SEWA_KEY
+import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity.Companion.NAMA_GEDUNG_KEY
 import com.afifemwe.bookinggedung.ui.detailgedung.adapter.FasilitasListAdapter
 import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
 import com.afifemwe.bookinggedung.ui.main.customer.beranda.adapter.PromoListAdapter
@@ -71,10 +73,6 @@ class DetailGedungActivity : AppCompatActivity() {
         bind.btnCekAgenda.setOnClickListener {
             getDatePicker()
         }
-
-
-
-
     }
 
     private fun getDatePicker() {
@@ -160,6 +158,8 @@ class DetailGedungActivity : AppCompatActivity() {
                                 btnBooking.setOnClickListener {
                                     val i = Intent(this@DetailGedungActivity, CekAgendaActivity::class.java)
                                     i.putExtra(ID_GEDUNG_KEY, idGedung)
+                                    i.putExtra(HARGA_SEWA_KEY, gedungDetail.harga)
+                                    i.putExtra(NAMA_GEDUNG_KEY, gedungDetail.nama)
                                     startActivity(i)
                                 }
 
