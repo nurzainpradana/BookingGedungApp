@@ -14,7 +14,10 @@ import com.afifemwe.bookinggedung.databinding.ActivitySignInBinding
 import com.afifemwe.bookinggedung.model.GeneralResponse
 import com.afifemwe.bookinggedung.ui.main.customer.CustomerMainActivity
 import com.afifemwe.bookinggedung.ui.main.pemilik.PemilikMainActivity
+import com.afifemwe.bookinggedung.ui.signup.SignUpActivity
 import com.afifemwe.bookinggedung.utils.*
+import com.afifemwe.bookinggedung.utils.Const.Companion.CUSTOMER
+import com.afifemwe.bookinggedung.utils.Const.Companion.PEMILIK
 import retrofit2.Call
 import retrofit2.Response
 
@@ -32,9 +35,31 @@ class SignInActivity : AppCompatActivity() {
 
         bind = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
 
+        initUserPreference()
+
         initSpinnerTipePengguna()
 
         bind.btnSignIn.setOnClickListener { verification() }
+
+        bind.tvBuatAkun.setOnClickListener{ goToSignUp() }
+    }
+
+    private fun goToSignUp() {
+        val i = Intent(this, SignUpActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun initUserPreference() {
+        val userPreference = UserPreference(this)
+        val username = userPreference.getUsername()
+        val tipePengguna = userPreference.getTipePengguna()
+
+        if (username != "" || username != null) {
+            when(tipePengguna) {
+                PEMILIK -> goToMain(PemilikMainActivity::class.java)
+                CUSTOMER -> goToMain(CustomerMainActivity::class.java)
+            }
+        }
     }
 
     private fun initSpinnerTipePengguna() {
@@ -74,19 +99,20 @@ class SignInActivity : AppCompatActivity() {
                                 userPref.setUsername(username)
                                 userPref.setTipePengguna(tipePengguna)
 
-                                Toast.makeText(this@SignInActivity, tipePengguna, Toast.LENGTH_SHORT).show()
+//                                Toast.makeText(this@SignInActivity, tipePengguna, Toast.LENGTH_SHORT).show()
 
                                 if (response.body()?.status == Const.SUCCESS_RESPONSE) {
                                     when(tipePengguna) {
                                         Const.PEMILIK -> {
                                             goToMain(PemilikMainActivity::class.java)
+
                                         }
 
                                         Const.CUSTOMER -> {
-//                                            goToMain(CustomerMainActivity::class.java)
-                                            val i = Intent(this@SignInActivity, CustomerMainActivity::class.java)
-                                            startActivity(i)
-                                            finish()
+                                            goToMain(CustomerMainActivity::class.java)
+//                                            val i = Intent(this@SignInActivity, CustomerMainActivity::class.java)
+//                                            startActivity(i)
+//                                            finish()
 //                                            Toast.makeText(this@SignInActivity, " Customer Activty", Toast.LENGTH_SHORT).show()
                                         }
                                         else -> {

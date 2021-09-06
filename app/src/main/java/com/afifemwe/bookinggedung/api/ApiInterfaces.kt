@@ -2,7 +2,10 @@ package com.afifemwe.bookinggedung.api
 
 import com.afifemwe.bookinggedung.model.GeneralResponse
 import com.afifemwe.bookinggedung.ui.cekagenda.response.CheckBookingResponse
+import com.afifemwe.bookinggedung.ui.detailbooking.response.DetailBookingResponse
 import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
+import com.afifemwe.bookinggedung.ui.main.customer.akun.response.DetailAkunResponse
+import com.afifemwe.bookinggedung.ui.main.customer.riwayat.response.RiwayatBookingResponse
 import com.afifemwe.bookinggedung.ui.main.pemilik.beranda.response.GetGedungListResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -117,4 +120,47 @@ interface ApiInterfaces {
         @Field("biaya") biaya: String,
         @Field("status") status: String
     ): Call<GeneralResponse>
+
+    /* BookingGedung */
+    @FormUrlEncoded
+    @POST("get_detail_booking")
+    fun getDetailBookingGedung(
+        @Field("idBooking") idBooking: String
+    ): Call<DetailBookingResponse>
+
+    /* Detail Akun */
+    @FormUrlEncoded
+    @POST("get_detail_akun")
+    fun getDetailAkun(
+        @Field("username") username: String
+    ): Call<DetailAkunResponse>
+
+    /* Get List Riwayat Booking Customer */
+    @FormUrlEncoded
+    @POST("get_riwayat_booking_customer")
+    fun getListRiwayatBookingCustomer(
+        @Field("username") username: String
+    ): Call<RiwayatBookingResponse>
+
+    /* Get List Riwayat Booking Pemilik */
+    @FormUrlEncoded
+    @POST("get_riwayat_booking_pemilik")
+    fun getListRiwayatBookingPemilik(
+        @Field("username") username: String
+    ): Call<RiwayatBookingResponse>
+
+    /* Cancel Booking */
+    @FormUrlEncoded
+    @POST("cancel_booking")
+    fun cancelBooking(
+        @Field("id_booking") idBooking: String
+    ): Call<GeneralResponse>
+
+    /* Konfirmasi Pembayaran */
+    @FormUrlEncoded
+    @POST("konfirmasi_pembayaran")
+    fun konfirmasiPembayaran(
+        @Field("id_booking") idBooking: String
+    ): Call<GeneralResponse>
+
 }

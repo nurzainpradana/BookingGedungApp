@@ -60,4 +60,10 @@
     <string name="kapasitas_500_up_text"><![CDATA[Kapasitas > 500]]></string>
     <string name="kapasitas_500_down_text"><![CDATA[Kapasitas < 500]]></string>
     <string name="tampil_semua_text">Tampil Semua</string>
+    <string name="detail_booking">Detail Booking</string>
+    <string name="batal">Batal</string>
+    <string name="konfirmasi_sudah_bayar">Konfirmasi Sudah Bayar</string>
+    <string name="batalkan_pesanan">Batalkan Pesanan</string>
+    <string name="log_out">Log Out</string>
+    <string name="update">Update</string>
 </resources>

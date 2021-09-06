@@ -149,7 +149,7 @@ class SignUpActivity : AppCompatActivity() {
         Log.i("ListPg", tipePenggunaList.toString())
         Log.i("ListPg Opsi", tipePenggunaOpsi.toString())
 
-        Toast.makeText(this, tipePenggunaOpsi.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, tipePenggunaOpsi.toString(), Toast.LENGTH_SHORT).show()
 
         bind.spinnerTipePengguna.onItemSelectedListener =
             object: OnItemSelectedListener {
@@ -161,7 +161,7 @@ class SignUpActivity : AppCompatActivity() {
                 ) {
                     tipePengguna = tipePenggunaOpsi[position]
 
-                    Toast.makeText(this@SignUpActivity, tipePengguna + position, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@SignUpActivity, tipePengguna + position, Toast.LENGTH_SHORT).show()
 
                     Log.i("Pg Selected", tipePengguna)
 
@@ -191,7 +191,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun getTipePenggunaList(): MutableList<String> {
 
         tipePenggunaOpsi.add(0,"pemilik")
-        tipePenggunaOpsi.add(1,"customer")
+        tipePenggunaOpsi.add(1,"pelanggan")
 
         return tipePenggunaOpsi
     }

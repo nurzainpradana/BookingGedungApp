@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:elevation="5dp"
-            app:menu="@menu/bottom_nav_menu_pemilik"
+            app:menu="@menu/bottom_menu"
             android:background="@drawable/bg_top_radius_dark_lime"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"

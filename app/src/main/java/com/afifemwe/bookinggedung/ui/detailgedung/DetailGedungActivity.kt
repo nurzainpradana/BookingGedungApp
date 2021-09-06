@@ -148,7 +148,7 @@ class DetailGedungActivity : AppCompatActivity() {
                                 }
 
                                 btnGoToMaps.setOnClickListener {
-                                    if (!!gedungDetail.maps.isNullOrEmpty()) {
+                                    if (!gedungDetail.maps.isNullOrEmpty()) {
                                         val i = Intent(Intent.ACTION_VIEW, Uri.parse(gedungDetail.maps.toString()))
                                         Log.i("maps", gedungDetail.maps.toString())
                                         startActivity(i)

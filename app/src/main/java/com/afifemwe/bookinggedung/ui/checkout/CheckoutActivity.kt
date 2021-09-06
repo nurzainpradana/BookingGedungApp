@@ -68,7 +68,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         bind.apply {
             tvNamaGedung.text = namaGedung
-            tvBiayaSewa.text = Converter.formatRupiah(hargaSewa)
+            tvBiayaSewa.text = """${Converter.formatRupiah(hargaSewa)} X ${(listWaktuSewa.size + 1)} = ${Converter.formatRupiah(biayaSewa)}"""
             tvTanggalSewa.text = tanggalSewa
 
             listWaktuSewa.forEach {
