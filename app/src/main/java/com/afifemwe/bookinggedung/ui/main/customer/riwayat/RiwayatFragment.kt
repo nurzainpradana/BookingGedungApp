@@ -74,6 +74,16 @@ class RiwayatFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (tipe_pengguna == PEMILIK ) {
+            initListRiwayatPemilik()
+        } else if (tipe_pengguna == CUSTOMER) {
+            initListRiwayatCustomer()
+        }
+    }
+
     private fun initListRiwayatCustomer() {
         customerViewModel = ViewModelProvider(this).get(RiwayatBookingCustomerViewModel::class.java)
 

@@ -1,14 +1,16 @@
 package com.afifemwe.bookinggedung.ui.detailgedung
 
-import android.app.Application
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afifemwe.bookinggedung.R
@@ -16,18 +18,18 @@ import com.afifemwe.bookinggedung.api.Api
 import com.afifemwe.bookinggedung.api.ApiInterfaces
 import com.afifemwe.bookinggedung.databinding.ActivityDetailGedungBinding
 import com.afifemwe.bookinggedung.model.Fasilitas
+import com.afifemwe.bookinggedung.model.GeneralResponse
 import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity
 import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity.Companion.HARGA_SEWA_KEY
 import com.afifemwe.bookinggedung.ui.cekagenda.CekAgendaActivity.Companion.TANGGAL_SEWA_KEY
 import com.afifemwe.bookinggedung.ui.checkout.CheckoutActivity.Companion.NAMA_GEDUNG_KEY
 import com.afifemwe.bookinggedung.ui.detailgedung.adapter.FasilitasListAdapter
 import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
-import com.afifemwe.bookinggedung.ui.main.customer.beranda.adapter.PromoListAdapter
-import com.afifemwe.bookinggedung.ui.main.pemilik.beranda.response.GetGedungListResponse
 import com.afifemwe.bookinggedung.utils.Const
 import com.afifemwe.bookinggedung.utils.Converter
 import com.afifemwe.bookinggedung.utils.NetworkUtility
 import com.afifemwe.bookinggedung.utils.UserPreference
+import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,6 +47,11 @@ class DetailGedungActivity : AppCompatActivity() {
 
     private lateinit var idGedung: String
     private lateinit var idUser: String
+
+    private var localeID = Locale("id", "ID")
+
+    private var hargaSewa: String = "0"
+    private var namaGedung: String = ""
 
     lateinit var fasilitas: Fasilitas
 
@@ -70,9 +77,9 @@ class DetailGedungActivity : AppCompatActivity() {
             bind.swipeContainer.isRefreshing = false
         }
 
-        bind.btnCekAgenda.setOnClickListener {
-            getDatePicker()
-        }
+//        bind.btnCekAgenda.setOnClickListener {
+//            getDatePicker()
+//        }
     }
 
     private fun getDatePicker() {
@@ -84,14 +91,20 @@ class DetailGedungActivity : AppCompatActivity() {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
 
-            val formatDate = "E, dd MMMM yyyy"
-            val sdf = SimpleDateFormat(formatDate, Locale.getDefault())
-            val myCalendar = Calendar.getInstance(Locale.getDefault())
+            val formatDate = "yyyy-MM-dd"
+            val sdf = SimpleDateFormat(formatDate, localeID)
+            val myCalendar = Calendar.getInstance(localeID)
 
             var selectedDate = ""
 
+            var context: Context = this
+
+//            if (isBrokenSamsungDevice()) {
+//                context = ContextThemeWrapper(this, android.R.style.Theme_Holo_Light_Dialog)
+//            }
+
             DatePickerDialog(
-                this,
+                context,
                 { _, year, month, dayOfMonth ->
                     myCalendar.set(Calendar.YEAR, year)
                     myCalendar.set(Calendar.MONTH, month)
@@ -99,17 +112,26 @@ class DetailGedungActivity : AppCompatActivity() {
 
                     selectedDate = sdf.format(myCalendar.time)
 
+//                    Log.i("Date", selectedDate)
+
+//                    Toast.makeText(this, selectedDate.toString(), Toast.LENGTH_SHORT).show()
+
                     val i = Intent(this@DetailGedungActivity, CekAgendaActivity::class.java)
                     i.putExtra(ID_GEDUNG_KEY, idGedung)
                     i.putExtra(TANGGAL_SEWA_KEY, selectedDate)
+                    i.putExtra(HARGA_SEWA_KEY, hargaSewa)
+                    i.putExtra(NAMA_GEDUNG_KEY, namaGedung)
                     startActivity(i)
                 },
                 year, month, day
             ).show()
-
-
         }
     }
+
+    private fun isBrokenSamsungDevice(): Boolean {
+        return (Build.MANUFACTURER.equals("samsung", ignoreCase = true))
+    }
+
 
     private fun initDetailGedung() {
         if (NetworkUtility.isInternetAvailable(this)) {
@@ -124,6 +146,11 @@ class DetailGedungActivity : AppCompatActivity() {
                         val gedungDetail = response.body()!!.gedungDetail
 
                         if (gedungDetail != null) {
+
+                            hargaSewa = gedungDetail.harga.toString()
+                            namaGedung = gedungDetail.nama.toString()
+                            Log.i("HRG SW", hargaSewa)
+                            Log.i("GD H", gedungDetail.harga.toString())
 
                             bind.apply {
                                 tvNamaGedung.text = gedungDetail.nama
@@ -142,25 +169,51 @@ class DetailGedungActivity : AppCompatActivity() {
                                     .error(R.drawable.dummy_image)
                                     .into(ivGambarGedung)
 
-                                if (gedungDetail.maps.isNullOrEmpty() && !gedungDetail.maps?.startsWith("http://")!! && !gedungDetail.maps.startsWith("https://")) {
+                                if (gedungDetail.maps.isNullOrEmpty() && !gedungDetail.maps?.startsWith(
+                                        "http://"
+                                    )!! && !gedungDetail.maps.startsWith("https://")
+                                ) {
                                     btnGoToMaps.isClickable = false
                                     btnGoToMaps.visibility = View.GONE
                                 }
 
                                 btnGoToMaps.setOnClickListener {
                                     if (!gedungDetail.maps.isNullOrEmpty()) {
-                                        val i = Intent(Intent.ACTION_VIEW, Uri.parse(gedungDetail.maps.toString()))
+                                        val i = Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse(gedungDetail.maps.toString())
+                                        )
                                         Log.i("maps", gedungDetail.maps.toString())
                                         startActivity(i)
                                     }
                                 }
 
+                                btnDelete.setOnClickListener {
+                                    MaterialDialog(this@DetailGedungActivity).show {
+                                        title(R.string.konfirmasi_menghapus)
+                                        message(R.string.konfirmasi_menghapus_message)
+                                        positiveButton(R.string.ya) {
+                                            Toast.makeText(context, "Menghapus", Toast.LENGTH_SHORT).show()
+
+                                            hapusGedung(gedungDetail.id.toString())
+                                        }
+                                        negativeButton(R.string.batal) {
+                                            this.dismiss()
+                                        }
+                                    }
+
+                                }
+
                                 btnBooking.setOnClickListener {
-                                    val i = Intent(this@DetailGedungActivity, CekAgendaActivity::class.java)
-                                    i.putExtra(ID_GEDUNG_KEY, idGedung)
-                                    i.putExtra(HARGA_SEWA_KEY, gedungDetail.harga)
-                                    i.putExtra(NAMA_GEDUNG_KEY, gedungDetail.nama)
-                                    startActivity(i)
+                                    getDatePicker()
+//                                    val i = Intent(
+//                                        this@DetailGedungActivity,
+//                                        CekAgendaActivity::class.java
+//                                    )
+//                                    i.putExtra(ID_GEDUNG_KEY, idGedung)
+//                                    i.putExtra(HARGA_SEWA_KEY, gedungDetail.harga)
+//                                    i.putExtra(NAMA_GEDUNG_KEY, gedungDetail.nama)
+//                                    startActivity(i)
                                 }
 
 
@@ -177,6 +230,42 @@ class DetailGedungActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun hapusGedung(idGedung: String) {
+        if(NetworkUtility.isInternetAvailable(this)) {
+            try {
+                val service = Api.getApi()!!.create(ApiInterfaces::class.java)
+                val call = service.hapusGedung(
+                    idGedung = idGedung
+                )
+
+                call.enqueue(object: retrofit2.Callback<GeneralResponse> {
+                    override fun onResponse(
+                        call: Call<GeneralResponse>,
+                        response: Response<GeneralResponse>
+                    ) {
+                        if (response.body()?.status == Const.SUCCESS_RESPONSE) {
+                            Toast.makeText(this@DetailGedungActivity, "Berhasil Hapus Gedung", Toast.LENGTH_SHORT).show()
+                            onBackPressed()
+                            finish()
+                        } else {
+                            Toast.makeText(this@DetailGedungActivity, response.body()?.message.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {
+                        NetworkUtility.checkYourConnection(this@DetailGedungActivity)
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                NetworkUtility.checkYourConnection(this)
+            }
+        } else {
+            NetworkUtility.checkYourConnection(this)
+        }
+
     }
 
     private fun initButtonMaps(maps: String?) {
@@ -202,11 +291,19 @@ class DetailGedungActivity : AppCompatActivity() {
                         listFasilitas.add(fasilitas)
                     }
                     "musollah" -> {
-                        fasilitas = Fasilitas(id = 3, nama = "Musollah", icon = R.drawable.ic_musollah)
+                        fasilitas = Fasilitas(
+                            id = 3,
+                            nama = "Musollah",
+                            icon = R.drawable.ic_musollah
+                        )
                         listFasilitas.add(fasilitas)
                     }
                     "kursi / meja" -> {
-                        fasilitas = Fasilitas(id = 4, nama = "Kursi / Meja", icon = R.drawable.ic_meja_kursi)
+                        fasilitas = Fasilitas(
+                            id = 4,
+                            nama = "Kursi / Meja",
+                            icon = R.drawable.ic_meja_kursi
+                        )
                         listFasilitas.add(fasilitas)
                     }
                     "ac" -> {
@@ -221,7 +318,11 @@ class DetailGedungActivity : AppCompatActivity() {
             val fasilitasListAdapter = FasilitasListAdapter(listFasilitas, applicationContext)
 
             bind.rvFasilitas.apply {
-                layoutManager = LinearLayoutManager(this@DetailGedungActivity, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = LinearLayoutManager(
+                    this@DetailGedungActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 setHasFixedSize(true)
                 adapter = fasilitasListAdapter
             }
@@ -244,9 +345,11 @@ class DetailGedungActivity : AppCompatActivity() {
     }
 
     private fun initView(tipePengguna: String) {
+//        Toast.makeText(this, tipePengguna.toString(), Toast.LENGTH_SHORT).show()
         if (tipePengguna == Const.PEMILIK) {
             bind.apply {
                 btnBooking.visibility = View.GONE
+                btnDelete.visibility = View.VISIBLE
             }
         }
     }

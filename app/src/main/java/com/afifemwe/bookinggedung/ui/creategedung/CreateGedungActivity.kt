@@ -58,6 +58,7 @@ class CreateGedungActivity : AppCompatActivity() {
                 progressDialog.show()
 
                 ImagePicker.with(this@CreateGedungActivity)
+                    .crop()
                     .start { resultCode, data ->
                         if (resultCode == Activity.RESULT_OK) {
                             ivGambarGedung.setImageURI(data?.data)
@@ -73,6 +74,8 @@ class CreateGedungActivity : AppCompatActivity() {
                                 if (NetworkUtility.isInternetAvailable(this@CreateGedungActivity)) {
                                     executor.execute {
                                         val uploadPhoto = UploadPhotoToServer()
+
+                                        Log.i("File Path", file.path.toString())
                                         uploadPhoto.upload(file.path, photoName)
                                         uploadPhoto.setOnPhotoUploadCallback(object : OnUploadCallback {
                                             override fun onSuccessUpload() {

@@ -163,4 +163,12 @@ interface ApiInterfaces {
         @Field("id_booking") idBooking: String
     ): Call<GeneralResponse>
 
+    /* Hapus Gedung */
+    @FormUrlEncoded
+    @POST("hapus_gedung")
+    fun hapusGedung(
+        @Field("id_gedung") idGedung: String
+    ): Call<GeneralResponse>
+
+
 }

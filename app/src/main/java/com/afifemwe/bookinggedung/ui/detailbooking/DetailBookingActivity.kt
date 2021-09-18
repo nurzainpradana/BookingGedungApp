@@ -183,6 +183,7 @@ class DetailBookingActivity : AppCompatActivity() {
                                             bind.apply {
                                                 layoutButtonCustomer.visibility = View.GONE
                                                 layoutButtonPemilik.visibility = View.VISIBLE
+                                                layoutPanduanTransfer.visibility = View.GONE
                                             }
                                         }
 

@@ -3,6 +3,7 @@ package com.afifemwe.bookinggedung.ui.cekagenda
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
@@ -64,25 +65,33 @@ class CekAgendaActivity : AppCompatActivity() {
         idGedung = intent.getStringExtra(ID_GEDUNG_KEY).toString()
         hargaSewa = intent.getStringExtra(HARGA_SEWA_KEY).toString()
         namaGedung = intent.getStringExtra(NAMA_GEDUNG_KEY).toString()
+
+        val localeIndonesia = Locale("id", "ID")
         
         if (intent.getStringExtra(TANGGAL_SEWA_KEY).isNullOrEmpty()) {
             var formatDate = "E, dd MM yyyy"
-            var sdf = SimpleDateFormat(formatDate, Locale.getDefault())
-            var myCalendar = Calendar.getInstance(Locale.getDefault())
-            
+            var sdf = SimpleDateFormat(formatDate, localeIndonesia)
+            var myCalendar = Calendar.getInstance(localeIndonesia)
+
             bind.tvDate.text = sdf.format(myCalendar.time)
-            
+
             formatDate = "yyyy-MM-dd"
-            sdf = SimpleDateFormat(formatDate, Locale.getDefault())
-            
+            sdf = SimpleDateFormat(formatDate, localeIndonesia)
+
             tanggalCekKetersediaan = sdf.format(myCalendar.time)
         } else {
-            tanggalCekKetersediaan = intent.getStringExtra(TANGGAL_SEWA_KEY).toString()
+            var tanggalIntent = intent.getStringExtra(TANGGAL_SEWA_KEY).toString()
 
             var formatDate = "E, dd MM yyyy"
-            var sdf = SimpleDateFormat(formatDate, Locale.getDefault())
+            var sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
-            bind.tvDate.text = sdf.format(Date.parse(tanggalCekKetersediaan))
+            bind.tvDate.text = tanggalIntent
+
+            formatDate = "yyyy-MM-dd"
+            sdf = SimpleDateFormat(formatDate, localeIndonesia)
+
+            tanggalCekKetersediaan = tanggalIntent
+            Log.i("TGLCK", tanggalCekKetersediaan)
 
         }
 
@@ -102,7 +111,7 @@ class CekAgendaActivity : AppCompatActivity() {
             if (listCheckedBox.isNullOrEmpty()){
                 Toast.makeText(this, "Silahkan Pilih Jam Booking Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             } else {
-                var biayaSewa = hargaSewa.toDouble() * (listCheckedBox.size + 1).toDouble()
+                var biayaSewa = hargaSewa.toDouble() * (listCheckedBox.size).toDouble()
                 // PINDAH KE CHECKOUT
                 val i = Intent(this, CheckoutActivity::class.java)
                 i.putExtra(ID_GEDUNG_KEY, idGedung)
@@ -236,7 +245,9 @@ class CekAgendaActivity : AppCompatActivity() {
         checkBox.apply {
             visibility = View.GONE
             isChecked = false
+            isClickable = true
             setText(text)
+            setTextColor(resources.getColor(R.color.black))
         }
     }
 
@@ -280,9 +291,11 @@ class CekAgendaActivity : AppCompatActivity() {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
 
+            val localeIndonesia = Locale("id", "ID")
+
             var formatDate = "E, dd MM yyyy"
-            var sdf = SimpleDateFormat(formatDate, Locale.getDefault())
-            var myCalendar = Calendar.getInstance(Locale.getDefault())
+            var sdf = SimpleDateFormat(formatDate, localeIndonesia)
+            var myCalendar = Calendar.getInstance(localeIndonesia)
 
             DatePickerDialog(
                 this,
@@ -295,7 +308,7 @@ class CekAgendaActivity : AppCompatActivity() {
                     bind.tvDate.text = sdf.format(myCalendar.time)
 
                     formatDate = "yyyy-MM-dd"
-                    sdf = SimpleDateFormat(formatDate, Locale.getDefault())
+                    sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
                     tanggalCekKetersediaan = sdf.format(myCalendar.time)
 

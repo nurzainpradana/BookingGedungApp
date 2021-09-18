@@ -68,7 +68,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         bind.apply {
             tvNamaGedung.text = namaGedung
-            tvBiayaSewa.text = """${Converter.formatRupiah(hargaSewa)} X ${(listWaktuSewa.size + 1)} = ${Converter.formatRupiah(biayaSewa)}"""
+            tvBiayaSewa.text = """${Converter.formatRupiah(hargaSewa)} X ${(listWaktuSewa.size)} = ${Converter.formatRupiah(biayaSewa)}"""
             tvTanggalSewa.text = tanggalSewa
 
             listWaktuSewa.forEach {
@@ -156,6 +156,4 @@ class CheckoutActivity : AppCompatActivity() {
         Log.i("LWTS", waktuSewa)
         listWaktuSewa = waktuSewa.split(", ")?.map { it -> it.trim() }
     }
-
-
 }

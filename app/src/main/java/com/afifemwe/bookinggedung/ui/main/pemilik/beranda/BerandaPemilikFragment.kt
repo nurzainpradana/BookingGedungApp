@@ -137,6 +137,11 @@ class BerandaPemilikFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        showRecyclerView()
+    }
+
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.filter_3_juta_up -> showRecyclerViewFilter(Const.PRICE_3_UP)

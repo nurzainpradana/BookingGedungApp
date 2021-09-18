@@ -66,4 +66,9 @@
     <string name="batalkan_pesanan">Batalkan Pesanan</string>
     <string name="log_out">Log Out</string>
     <string name="update">Update</string>
+    <string name="cek_agenda">Cek Agenda</string>
+    <string name="hapus">Hapus</string>
+    <string name="konfirmasi_menghapus">Yakin untuk menghapus ?</string>
+    <string name="konfirmasi_menghapus_message">Apakah anda yakin untuk menghapus ?</string>
+    <string name="ya">Ya</string>
 </resources>

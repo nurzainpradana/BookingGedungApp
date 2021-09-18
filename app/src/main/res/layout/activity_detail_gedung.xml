@@ -63,6 +63,7 @@
 
                             <ImageView
                                 android:id="@+id/iv_rating"
+                                android:visibility="gone"
                                 android:layout_width="@dimen/dimen_35dp"
                                 android:layout_height="@dimen/dimen_35dp"
                                 android:src="@drawable/ic_rating"
@@ -72,6 +73,7 @@
 
                             <TextView
                                 android:id="@+id/tv_rating"
+                                android:visibility="gone"
                                 style="@style/big_text"
                                 android:textAlignment="textStart"
                                 android:layout_width="@dimen/dimen_35dp"
@@ -172,46 +174,65 @@
                         style="@style/big_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        tools:text="Rp. 5.000.000/Jam"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btn_booking" />
-
-                    <LinearLayout
-                        android:id="@+id/btn_cek_agenda"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp"
-                        android:elevation="@dimen/dimen_5dp"
+                        android:layout_marginStart="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_booking"
+                        app:layout_constraintEnd_toStartOf="@id/btn_booking"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_harga">
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Rp. 5.000.000/Jam" />
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_date" />
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/btn_cek_agenda"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:elevation="@dimen/dimen_5dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/btn_booking"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/tv_harga">-->
 
-                        <TextView
-                            style="@style/small_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="Cek Agenda" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:src="@drawable/ic_date" />-->
 
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            style="@style/small_text"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginStart="8dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Cek Agenda" />-->
+
+<!--                    </LinearLayout>-->
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_booking"
                         android:layout_width="150dp"
                         app:cornerRadius="20dp"
                         android:layout_height="70dp"
-                        android:text="@string/booking_text"
+                        android:drawableLeft="@drawable/ic_date"
+                        android:drawableTint="@color/white"
+                        android:text="@string/cek_agenda"
                         android:backgroundTint="@color/gray"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_delete"
+                        android:layout_width="150dp"
+                        app:cornerRadius="20dp"
+                        android:visibility="gone"
+                        android:layout_height="70dp"
+                        android:drawableLeft="@drawable/ic_trash"
+                        android:drawableTint="@color/white"
+                        android:text="@string/hapus"
+                        android:backgroundTint="@color/red"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
