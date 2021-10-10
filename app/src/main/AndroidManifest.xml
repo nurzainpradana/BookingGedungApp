@@ -21,30 +21,24 @@
         android:theme="@style/Theme.BookingGedung"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name=".ui.checkout.CheckoutActivity"></activity>
-        <activity android:name=".ui.detailbooking.DetailBookingActivity">
-
-        </activity>
+        <activity android:name=".ui.updateprofile.UpdateProfileActivity"></activity>
+        <activity android:name=".ui.checkout.CheckoutActivity" />
+        <activity android:name=".ui.detailbooking.DetailBookingActivity"></activity>
         <activity android:name=".ui.creategedung.CreateGedungActivity" />
         <activity android:name=".testing.TestingActivity" />
-        <activity android:name=".ui.cekagenda.CekAgendaActivity">
-
-        </activity>
+        <activity android:name=".ui.cekagenda.CekAgendaActivity"></activity>
         <activity android:name=".ui.detailgedung.DetailGedungActivity" />
         <activity android:name=".ui.main.pemilik.PemilikMainActivity" />
-        <activity android:name=".ui.main.customer.CustomerMainActivity">
-
-        </activity>
-        <activity android:name=".ui.signin.SignInActivity" >
+        <activity android:name=".ui.main.customer.CustomerMainActivity"></activity>
+        <activity android:name=".ui.signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.signup.SignUpActivity" />
-        <activity android:name=".ui.splashscreen.SplashScreenActivity">
-
-        </activity>
+        <activity android:name=".ui.splashscreen.SplashScreenActivity"></activity>
         <activity android:name=".ui.main.MainActivity" />
     </application>
 

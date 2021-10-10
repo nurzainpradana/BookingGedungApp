@@ -15,14 +15,14 @@
 
     <fragment
         android:id="@+id/navigation_riwayat"
-        android:name="com.afifemwe.bookinggedung.ui.main.customer.riwayat.RiwayatFragment"
+        android:name="com.afifemwe.bookinggedung.ui.riwayat.RiwayatFragment"
         android:label="Riwayat"
         tools:layout="@layout/fragment_riwayat"
         app:layout="@layout/fragment_riwayat"/>
 
     <fragment
         android:id="@+id/navigation_akun_customer"
-        android:name="com.afifemwe.bookinggedung.ui.main.customer.akun.AkunFragment"
+        android:name="com.afifemwe.bookinggedung.ui.akun.AkunFragment"
         android:label="Akun"
         tools:layout="@layout/fragment_akun"
         app:layout="@layout/fragment_akun"/>

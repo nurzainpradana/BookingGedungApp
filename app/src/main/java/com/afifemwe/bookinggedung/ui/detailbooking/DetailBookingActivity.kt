@@ -170,28 +170,34 @@ class DetailBookingActivity : AppCompatActivity() {
                                     tvIdBooking.text = """#${data.id}"""
 
                                     if (data.status == "Menunggu Pembayaran") {
-                                        bind.tvDetailRekening.text = """${data.noRekening} (${data.namaBank}) a.n ${data.namaPemilik}"""
-                                        bind.layoutPanduanTransfer.visibility = View.VISIBLE
+                                        tvDetailRekening.text = """${data.noRekening} (${data.namaBank}) a.n ${data.namaPemilik}"""
+                                        layoutPanduanTransfer.visibility = View.VISIBLE
                                     } else {
-                                        bind.layoutPanduanTransfer.visibility = View.GONE
+                                        layoutPanduanTransfer.visibility = View.GONE
+                                    }
+
+                                    if (data.status == Const.STATUS_BATAL) {
+                                        btnKonfirmasiSudahBayar.visibility      = View.GONE
+                                        btnCancelOrder.visibility               = View.GONE
+                                    } else {
+                                        btnKonfirmasiSudahBayar.visibility      = View.VISIBLE
+                                        btnCancelOrder.visibility               = View.VISIBLE
                                     }
 
                                     val listJamSewa = data.jamSewa!!.split(", ")?.map { it -> it.trim() }
 
                                     when(tipePengguna) {
                                         PEMILIK -> {
-                                            bind.apply {
-                                                layoutButtonCustomer.visibility = View.GONE
-                                                layoutButtonPemilik.visibility = View.VISIBLE
-                                                layoutPanduanTransfer.visibility = View.GONE
-                                            }
+                                            layoutButtonCustomer.visibility = View.GONE
+                                            layoutButtonPemilik.visibility = View.VISIBLE
+                                            layoutPanduanTransfer.visibility = View.GONE
+
                                         }
 
                                         CUSTOMER -> {
-                                            bind.apply {
-                                                layoutButtonPemilik.visibility = View.GONE
-                                                layoutButtonCustomer.visibility = View.VISIBLE
-                                            }
+                                            layoutButtonPemilik.visibility = View.GONE
+                                            layoutButtonCustomer.visibility = View.VISIBLE
+
                                         }
                                     }
 

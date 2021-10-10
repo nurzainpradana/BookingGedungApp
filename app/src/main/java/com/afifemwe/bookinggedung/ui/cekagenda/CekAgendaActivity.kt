@@ -69,25 +69,23 @@ class CekAgendaActivity : AppCompatActivity() {
         val localeIndonesia = Locale("id", "ID")
         
         if (intent.getStringExtra(TANGGAL_SEWA_KEY).isNullOrEmpty()) {
-            var formatDate = "E, dd MM yyyy"
+            var formatDate = "yyyy-MM-dd"
             var sdf = SimpleDateFormat(formatDate, localeIndonesia)
             var myCalendar = Calendar.getInstance(localeIndonesia)
 
             bind.tvDate.text = sdf.format(myCalendar.time)
 
-            formatDate = "yyyy-MM-dd"
             sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
             tanggalCekKetersediaan = sdf.format(myCalendar.time)
         } else {
             var tanggalIntent = intent.getStringExtra(TANGGAL_SEWA_KEY).toString()
 
-            var formatDate = "E, dd MM yyyy"
+            var formatDate = "yyyy-MM-dd"
             var sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
             bind.tvDate.text = tanggalIntent
 
-            formatDate = "yyyy-MM-dd"
             sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
             tanggalCekKetersediaan = tanggalIntent
@@ -293,7 +291,7 @@ class CekAgendaActivity : AppCompatActivity() {
 
             val localeIndonesia = Locale("id", "ID")
 
-            var formatDate = "E, dd MM yyyy"
+            var formatDate = "yyyy-MM-dd"
             var sdf = SimpleDateFormat(formatDate, localeIndonesia)
             var myCalendar = Calendar.getInstance(localeIndonesia)
 
@@ -307,7 +305,6 @@ class CekAgendaActivity : AppCompatActivity() {
 
                     bind.tvDate.text = sdf.format(myCalendar.time)
 
-                    formatDate = "yyyy-MM-dd"
                     sdf = SimpleDateFormat(formatDate, localeIndonesia)
 
                     tanggalCekKetersediaan = sdf.format(myCalendar.time)

@@ -183,7 +183,7 @@ class SignUpActivity : AppCompatActivity() {
 
         var adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, tipeJenisKelaminList)
 
-        bind.spinnerJenisKelamin.setAdapter(adapter)
+        bind.spinnerJenisKelamin.adapter = adapter
 
         Log.i("ListJK", tipeJenisKelaminList.toString())
     }

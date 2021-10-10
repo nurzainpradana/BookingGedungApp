@@ -6,11 +6,11 @@
     <data>
         <variable
             name="riwayatPemilikList"
-            type="com.afifemwe.bookinggedung.ui.main.customer.riwayat.viewmodel.RiwayatBookingPemilikViewModel" />
+            type="com.afifemwe.bookinggedung.ui.riwayat.viewmodel.RiwayatBookingPemilikViewModel" />
 
         <variable
             name="riwayatCustomerList"
-            type="com.afifemwe.bookinggedung.ui.main.customer.riwayat.viewmodel.RiwayatBookingCustomerViewModel" />
+            type="com.afifemwe.bookinggedung.ui.riwayat.viewmodel.RiwayatBookingCustomerViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".ui.main.customer.riwayat.RiwayatFragment">
+            tools:context=".ui.riwayat.RiwayatFragment">
 
             <TextView
                 android:id="@+id/tv_title"

@@ -4,8 +4,8 @@ import com.afifemwe.bookinggedung.model.GeneralResponse
 import com.afifemwe.bookinggedung.ui.cekagenda.response.CheckBookingResponse
 import com.afifemwe.bookinggedung.ui.detailbooking.response.DetailBookingResponse
 import com.afifemwe.bookinggedung.ui.detailgedung.response.GedungDetailResponse
-import com.afifemwe.bookinggedung.ui.main.customer.akun.response.DetailAkunResponse
-import com.afifemwe.bookinggedung.ui.main.customer.riwayat.response.RiwayatBookingResponse
+import com.afifemwe.bookinggedung.ui.akun.response.DetailAkunResponse
+import com.afifemwe.bookinggedung.ui.riwayat.response.RiwayatBookingResponse
 import com.afifemwe.bookinggedung.ui.main.pemilik.beranda.response.GetGedungListResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -19,7 +19,7 @@ interface ApiInterfaces {
     @FormUrlEncoded
     @POST("registrasi_akun")
     fun registerAkun(
-        @Field("name") nama: String,
+        @Field("nama") nama: String,
         @Field("username") username: String,
         @Field("email") email: String,
         @Field("password") password: String,
@@ -168,6 +168,24 @@ interface ApiInterfaces {
     @POST("hapus_gedung")
     fun hapusGedung(
         @Field("id_gedung") idGedung: String
+    ): Call<GeneralResponse>
+
+
+    /* Update Akun */
+    @FormUrlEncoded
+    @POST("update_akun")
+    fun updateAkun(
+        @Field("nama") nama: String,
+        @Field("username") username: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("no_hp") no_hp: String,
+        @Field("jenis_kelamin") jenis_kelamin: String,
+        @Field("alamat") alamat: String,
+        @Field("tipe_user") tipe_user: String,
+        @Field("no_rek") no_rek: String?,
+        @Field("nama_bank") nama_bank: String?,
+        @Field("nama_pemilik") nama_pemilik: String?
     ): Call<GeneralResponse>
 
 
