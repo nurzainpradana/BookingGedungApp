@@ -1,4 +1,4 @@
-package com.afifemwe.bookinggedung.ui.signup
+    package com.afifemwe.bookinggedung.ui.signup
 
 import android.content.Intent
 import android.net.Network

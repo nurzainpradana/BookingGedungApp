@@ -117,6 +117,9 @@ class CreateGedungActivity : AppCompatActivity() {
 
             btnSimpan.setOnClickListener {
                 simpanData()
+
+//                checkCBFasilitas()
+//                Log.i("Fasilitas", listFasilitas.toString())
             }
         }
 
@@ -132,28 +135,34 @@ class CreateGedungActivity : AppCompatActivity() {
             }
 
             if (ValidateInput.validate(etNamaGedung) && ValidateInput.validate(etKapasitas) && ValidateInput.validate(etHarga) && ValidateInput.validate(etLinkMaps)) {
-                val namaGedung = etNamaGedung.text.toString()
-                val kapasitas = etKapasitas.text.toString()
-                val harga = etHarga.text.toString()
-                val linkMaps = etLinkMaps.text.toString()
+                val namaGedung  = etNamaGedung.text.toString()
+                val kapasitas   = etKapasitas.text.toString()
+                val harga       = etHarga.text.toString()
+                val linkMaps    = etLinkMaps.text.toString()
 
-                val userPref = UserPreference(this@CreateGedungActivity)
-                val pemilik = userPref.getUsername()
+                val userPref    = UserPreference(this@CreateGedungActivity)
+                val pemilik     = userPref.getUsername()
 
                 checkCBFasilitas()
                 checkCBJamOperasional()
 
+                var listFasilitasString = listFasilitas.toString().replace("[", "")
+                listFasilitasString = listFasilitasString.toString().replace("]", "")
+
+                var listJamOperasionalString    = listJamOperasional.toString().replace("[", "")
+                listJamOperasionalString = listJamOperasionalString.toString().replace("]", "")
+
                 if(NetworkUtility.isInternetAvailable(this@CreateGedungActivity)) {
                     try {
                         val call = service.buatGedungBaru(
-                            nama = namaGedung,
-                            gambar = photoName,
-                            kapasitas = kapasitas,
-                            fasilitas = listFasilitas.toString().replace("[]",""),
-                            jam_operasional = listJamOperasional.toString().replace("[]",""),
-                            maps = linkMaps,
-                            harga = harga,
-                            pemilik = pemilik.toString()
+                            nama            = namaGedung,
+                            gambar          = photoName,
+                            kapasitas       = kapasitas,
+                            fasilitas       = listFasilitasString,
+                            jam_operasional = listJamOperasionalString,
+                            maps            = linkMaps,
+                            harga           = harga,
+                            pemilik         = pemilik.toString()
                         )
 
                         call.enqueue(object: retrofit2.Callback<GeneralResponse> {
